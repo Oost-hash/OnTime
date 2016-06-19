@@ -2,8 +2,10 @@ D:\GitHub\OnTime\OnTime\bin\Debug\OnTime.exe.config
 D:\GitHub\OnTime\OnTime\bin\Debug\OnTime.exe
 D:\GitHub\OnTime\OnTime\bin\Debug\OnTime.pdb
 D:\GitHub\OnTime\OnTime\obj\Debug\OnTime.csprojResolveAssemblyReference.cache
-D:\GitHub\OnTime\OnTime\obj\Debug\OnTime.Form1.resources
 D:\GitHub\OnTime\OnTime\obj\Debug\OnTime.Properties.Resources.resources
 D:\GitHub\OnTime\OnTime\obj\Debug\OnTime.csproj.GenerateResource.Cache
 D:\GitHub\OnTime\OnTime\obj\Debug\OnTime.exe
 D:\GitHub\OnTime\OnTime\obj\Debug\OnTime.pdb
+D:\GitHub\OnTime\OnTime\bin\Debug\Microsoft.VisualBasic.PowerPacks.dll
+D:\GitHub\OnTime\OnTime\bin\Debug\Microsoft.VisualBasic.PowerPacks.xml
+D:\GitHub\OnTime\OnTime\obj\Debug\OnTime.MainWindow.resources
