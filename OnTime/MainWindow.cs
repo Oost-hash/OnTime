@@ -72,33 +72,67 @@ namespace OnTime
         private void info1_Click(object sender, EventArgs e)
         {
             _guiControl.ColorSwitch(1);
+            GetTravelInfo(1);
         }
 
         private void info2_Click(object sender, EventArgs e)
         {
             _guiControl.ColorSwitch(2);
+            GetTravelInfo(2);
         }
+
         private void info3_Click(object sender, EventArgs e)
         {
             _guiControl.ColorSwitch(3);
+            GetTravelInfo(3);
         }
+
         private void info4_Click(object sender, EventArgs e)
         {
             _guiControl.ColorSwitch(4);
+            GetTravelInfo(4);
         }
 
 
-        public void GetTravelInfo(int i)
+        public void GetTravelInfo(int x)
         {
-            XmlNodeList nodeList = _data.SelectNodes("ReisMogelijkheden/ReisMogelijkheid");
-            if (nodeList != null)
-                foreach (XmlNode data in nodeList)
+            int i = 1;
+            XmlNodeList travelOptions = _data.SelectNodes("ReisMogelijkheden/ReisMogelijkheid");
+            if (travelOptions != null)
+                foreach (XmlNode travelOption in travelOptions)
                 {
-                    if (i == 1)
+                    if (i == x)
                     {
-                        
+                        ParseInfo(travelOption);
                     }
+                    i++;
+                }
+        }
+
+        public void ParseInfo(XmlNode travelOption)
+        {
+            XmlNodeList travelParts = travelOption.SelectNodes("ReisDeel");
+            if (travelParts != null)
+                foreach (XmlNode travelPart in travelParts)
+                {
+                    XmlNodeList travelStops = travelPart.SelectNodes("ReisStop");
+                    int i = 0;
+                    if (travelStops != null)
+                        foreach (XmlNode travelStop in travelStops)
+                        {
+                            if (i == 0)
+                            {
+                                Console.WriteLine(travelStop.InnerText);
+                            }
+                            else if (i == travelStops.Count - 1)
+                            {
+                                Console.WriteLine(travelStop.InnerText);
+                                Console.WriteLine(travelStop["Spoor"]?.InnerText);
+                            }
+                            i++;
+                        }
                 }
         }
     }
 }
+

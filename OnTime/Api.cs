@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace OnTime
@@ -19,8 +20,15 @@ namespace OnTime
             resolver.Credentials = new NetworkCredential(UserName, UserPass);
 
             XmlDocument xmlDoc = new XmlDocument {XmlResolver = resolver};
-            xmlDoc.Load(url);
-
+            try
+            {
+                xmlDoc.Load(url);
+            }
+            catch (XmlException e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            
             return xmlDoc;
         }
 
