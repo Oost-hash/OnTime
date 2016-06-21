@@ -190,7 +190,7 @@
             this.panTravelInfo.Controls.Add(this.shapeContainer2);
             this.panTravelInfo.Location = new System.Drawing.Point(0, 0);
             this.panTravelInfo.Name = "panTravelInfo";
-            this.panTravelInfo.Size = new System.Drawing.Size(619, 501);
+            this.panTravelInfo.Size = new System.Drawing.Size(609, 501);
             this.panTravelInfo.TabIndex = 8;
             this.panTravelInfo.Click += new System.EventHandler(this.info2_click);
             // 
@@ -427,7 +427,7 @@
             this.info2,
             this.info3,
             this.info4});
-            this.shapeContainer2.Size = new System.Drawing.Size(619, 501);
+            this.shapeContainer2.Size = new System.Drawing.Size(609, 501);
             this.shapeContainer2.TabIndex = 0;
             this.shapeContainer2.TabStop = false;
             // 
