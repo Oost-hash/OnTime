@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -24,11 +25,10 @@ namespace OnTime
             {
                 xmlDoc.Load(url);
             }
-            catch (XmlException e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
             }
-            
             return xmlDoc;
         }
 
@@ -75,6 +75,13 @@ namespace OnTime
             {
                 url += "&Departure=false";
             }
+
+            return ApiCall(url);
+        }
+
+        public XmlDocument Stations()
+        {
+            string url = $"{BaseUrl}stations-v2";
 
             return ApiCall(url);
         }
