@@ -28,12 +28,14 @@ namespace OnTime
         //Link to classes
         private readonly Api _api;
         private readonly MainWindow _main;
+        private readonly GuiControl _guiControl;
         private XmlDocument _data;
         
         public TravelInfo(MainWindow main)
         {
             _api = new Api();
             _main = main;
+            _guiControl = new GuiControl(_main);
         }
 
         public void ShowTravelOptions()
@@ -71,6 +73,8 @@ namespace OnTime
                             _main.dptLBL3.Text = departureTime?.Substring(11, 5) + @" ➜ " + arivalTime?.Substring(11, 5);
                             _main.swLBL3.Text = data["AantalOverstappen"]?.InnerText;
                             _main.trtLBL3.Text = data["ActueleReisTijd"]?.InnerText;
+                            _guiControl.ColorSwitch(3);
+                            GetTravelOptions(3);
                             break;
                         case 4:
                             _main.dptLBL4.Text = departureTime?.Substring(11, 5) + @" ➜ " + arivalTime?.Substring(11, 5);
@@ -106,6 +110,10 @@ namespace OnTime
 
         public void ParseInfo(XmlNode travelOption)
         {
+            bool first = true;
+            string strOne = "";
+            string station = "";
+
             //Iterate to the correct info
             var travelParts = travelOption.SelectNodes("ReisDeel");
             if (travelParts != null)
@@ -119,7 +127,7 @@ namespace OnTime
                             //Variables needed for printing the labels
                             string carrier = travelPart["Vervoerder"]?.InnerText;
                             string transportType = travelPart["VervoerType"]?.InnerText;
-                            string station = travelStop["Naam"]?.InnerText;
+                            station = travelStop["Naam"]?.InnerText;
                             string time = travelStop["Tijd"]?.InnerText;
                             string trackNr = travelStop["Spoor"]?.InnerText;
 
@@ -127,6 +135,11 @@ namespace OnTime
                             if (countStations == 0)
                             {
                                 PrintTravelOption(station, time, trackNr, carrier, transportType);
+                                if (first)
+                                {
+                                    strOne = station;
+                                    first = false;
+                                }
                             }
                             //Print last Station
                             else if (countStations == travelStops.Count - 1)
@@ -135,6 +148,7 @@ namespace OnTime
                             }
                             countStations++;
                         }
+                    _main.stationNamesLBL.Text = strOne + @" ➜ " + station;
                 }
         }
 
@@ -215,7 +229,7 @@ namespace OnTime
                 _main.tabActualDeparture.Show();
             };
 
-            stationLabel.MouseEnter += (s, e) => { stationLabel.ForeColor = Color.Aqua; };
+            stationLabel.MouseEnter += (s, e) => { stationLabel.ForeColor = Color.FromArgb(0, 154, 224); };
             stationLabel.MouseLeave += (s, e) => { stationLabel.ForeColor = Color.Black; };
             _main.tabTravelInfo.Controls.Add(stationLabel);
 
@@ -270,8 +284,8 @@ namespace OnTime
                     _trackNrList.Clear();
                 }
 
-                _headerY = 110;
-                _infoY = 130;
+                _headerY = 150;
+                _infoY = 170;
                 _counterHeader = 0;
             }
         }

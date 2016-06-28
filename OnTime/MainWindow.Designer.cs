@@ -65,9 +65,10 @@
             this.info2 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.info1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.tabActualDeparture = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.carrierLabel = new System.Windows.Forms.Label();
+            this.trackLabel = new System.Windows.Forms.Label();
+            this.destLBL = new System.Windows.Forms.Label();
+            this.timeLBL = new System.Windows.Forms.Label();
             this.stationLBL = new System.Windows.Forms.Label();
             this.MainControl.SuspendLayout();
             this.tabPlanRoute.SuspendLayout();
@@ -201,10 +202,10 @@
             // stationNamesLBL
             // 
             this.stationNamesLBL.AutoSize = true;
-            this.stationNamesLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stationNamesLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
             this.stationNamesLBL.Location = new System.Drawing.Point(232, 80);
             this.stationNamesLBL.Name = "stationNamesLBL";
-            this.stationNamesLBL.Size = new System.Drawing.Size(162, 26);
+            this.stationNamesLBL.Size = new System.Drawing.Size(138, 24);
             this.stationNamesLBL.TabIndex = 47;
             this.stationNamesLBL.Text = "StationNames";
             // 
@@ -496,9 +497,10 @@
             // 
             // tabActualDeparture
             // 
-            this.tabActualDeparture.Controls.Add(this.label4);
-            this.tabActualDeparture.Controls.Add(this.label3);
-            this.tabActualDeparture.Controls.Add(this.label2);
+            this.tabActualDeparture.Controls.Add(this.carrierLabel);
+            this.tabActualDeparture.Controls.Add(this.trackLabel);
+            this.tabActualDeparture.Controls.Add(this.destLBL);
+            this.tabActualDeparture.Controls.Add(this.timeLBL);
             this.tabActualDeparture.Controls.Add(this.stationLBL);
             this.tabActualDeparture.Location = new System.Drawing.Point(4, 22);
             this.tabActualDeparture.Name = "tabActualDeparture";
@@ -508,38 +510,51 @@
             this.tabActualDeparture.Text = "ActualDeparture";
             this.tabActualDeparture.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // carrierLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(346, 98);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "label4";
+            this.carrierLabel.AutoSize = true;
+            this.carrierLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.carrierLabel.Location = new System.Drawing.Point(450, 129);
+            this.carrierLabel.Name = "carrierLabel";
+            this.carrierLabel.Size = new System.Drawing.Size(73, 13);
+            this.carrierLabel.TabIndex = 4;
+            this.carrierLabel.Text = "Vervoerder:";
             // 
-            // label3
+            // trackLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(228, 98);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "label3";
+            this.trackLabel.AutoSize = true;
+            this.trackLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trackLabel.Location = new System.Drawing.Point(324, 129);
+            this.trackLabel.Name = "trackLabel";
+            this.trackLabel.Size = new System.Drawing.Size(44, 13);
+            this.trackLabel.TabIndex = 3;
+            this.trackLabel.Text = "Spoor:";
             // 
-            // label2
+            // destLBL
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(163, 98);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
+            this.destLBL.AutoSize = true;
+            this.destLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.destLBL.Location = new System.Drawing.Point(186, 129);
+            this.destLBL.Name = "destLBL";
+            this.destLBL.Size = new System.Drawing.Size(58, 13);
+            this.destLBL.TabIndex = 2;
+            this.destLBL.Text = "Richting:";
+            // 
+            // timeLBL
+            // 
+            this.timeLBL.AutoSize = true;
+            this.timeLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeLBL.Location = new System.Drawing.Point(120, 129);
+            this.timeLBL.Name = "timeLBL";
+            this.timeLBL.Size = new System.Drawing.Size(32, 13);
+            this.timeLBL.TabIndex = 1;
+            this.timeLBL.Text = "Tijd:";
             // 
             // stationLBL
             // 
             this.stationLBL.AutoSize = true;
             this.stationLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stationLBL.Location = new System.Drawing.Point(90, 62);
+            this.stationLBL.Location = new System.Drawing.Point(120, 93);
             this.stationLBL.Name = "stationLBL";
             this.stationLBL.Size = new System.Drawing.Size(87, 26);
             this.stationLBL.TabIndex = 0;
@@ -603,10 +618,11 @@
         public Microsoft.VisualBasic.PowerPacks.RectangleShape info1;
         public System.Windows.Forms.Label dptLBLBig;
         public System.Windows.Forms.TabPage tabActualDeparture;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        public System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label stationLBL;
+        public System.Windows.Forms.Label stationLBL;
+        private System.Windows.Forms.Label carrierLabel;
+        private System.Windows.Forms.Label trackLabel;
+        private System.Windows.Forms.Label destLBL;
+        private System.Windows.Forms.Label timeLBL;
     }
 }
 
