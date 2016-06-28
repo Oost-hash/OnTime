@@ -16,10 +16,10 @@ namespace OnTime
         //Start cordinates
         private int _infoY = 98;
 
-        public Departure()
+        public Departure(MainWindow main)
         {
             _api = new Api();
-            _main = new MainWindow();
+            _main = main;
         }
 
         public void GetDepartures(string station)
@@ -36,24 +36,24 @@ namespace OnTime
                     string track = trains["VertrekSpoor"].InnerText;
                     string carrier = trains["Vervoerder"].InnerText;
 
-                    printDeoarture(time);
+                    PrintDeparture(time);
                 }
         }
 
-        public void printDeoarture(string time)
+        public void PrintDeparture(string time)
         {
-            //// Print the transportType
-            //Label timeDepLabel = new Label
-            //{
-            //    Location = new Point(92, _infoY),
-            //    Size = new Size(80, 18),
-            //    Font = new Font("Open Sans", 9, FontStyle.Bold),
-            //    Text = time
-            //};
-            //_main.tabActualDeparture.Controls.Add(timeDepLabel);
+            // Print the transportType
+            Label timeDepLabel = new Label
+            {
+                Location = new Point(92, _infoY),
+                Size = new Size(80, 18),
+                Font = new Font("Open Sans", 9, FontStyle.Bold),
+                Text = time
+            };
+            _main.MainControl.TabPages[2].Controls.Add(timeDepLabel);
 
-            //_infoY += 20;
-            
+            _infoY += 20;
+
         }
     }
 }

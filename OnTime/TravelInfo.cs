@@ -209,7 +209,7 @@ namespace OnTime
             };
             stationLabel.Click += (s, e) =>
             {
-                Departure departure = new Departure();
+                Departure departure = new Departure(_main);
                 departure.GetDepartures(station);
                 _main.tabTravelInfo.Visible = false; 
                 _main.tabActualDeparture.Show();

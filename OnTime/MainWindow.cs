@@ -12,12 +12,14 @@ namespace OnTime
         private XmlDocument _stations;
         private readonly GuiControl _guiControl;
         private readonly TravelInfo _travelInfo;
+        private readonly Departure _departure;
 
         public MainWindow()
         {
             InitializeComponent();
              _guiControl = new GuiControl(this);
             _travelInfo = new TravelInfo(this);
+            _departure = new Departure(this);
             _api = new Api();
             _stations = _api.Stations();
 
