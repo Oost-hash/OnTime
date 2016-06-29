@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alerts.cs" />
     <Compile Include="Api.cs" />
     <Compile Include="Departure.cs" />
     <Compile Include="MainWindow.cs">

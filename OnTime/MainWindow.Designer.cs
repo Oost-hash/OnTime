@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnAlert = new System.Windows.Forms.Button();
             this.MainControl = new OnTime.TabControlHeaders();
             this.tabPlanRoute = new System.Windows.Forms.TabPage();
             this.boxTime = new System.Windows.Forms.DateTimePicker();
@@ -70,21 +71,35 @@
             this.destLBL = new System.Windows.Forms.Label();
             this.timeLBL = new System.Windows.Forms.Label();
             this.stationLBL = new System.Windows.Forms.Label();
+            this.tabAlerts = new System.Windows.Forms.TabPage();
+            this.btnPlanRoute = new System.Windows.Forms.Button();
+            this.btnMyRoutes = new System.Windows.Forms.Button();
             this.MainControl.SuspendLayout();
             this.tabPlanRoute.SuspendLayout();
             this.tabTravelInfo.SuspendLayout();
             this.tabActualDeparture.SuspendLayout();
             this.SuspendLayout();
             // 
+            // btnAlert
+            // 
+            this.btnAlert.Location = new System.Drawing.Point(189, 457);
+            this.btnAlert.Name = "btnAlert";
+            this.btnAlert.Size = new System.Drawing.Size(75, 23);
+            this.btnAlert.TabIndex = 6;
+            this.btnAlert.Text = "Wijzigingen";
+            this.btnAlert.UseVisualStyleBackColor = true;
+            this.btnAlert.Click += new System.EventHandler(this.Alerts_Click);
+            // 
             // MainControl
             // 
             this.MainControl.Controls.Add(this.tabPlanRoute);
             this.MainControl.Controls.Add(this.tabTravelInfo);
             this.MainControl.Controls.Add(this.tabActualDeparture);
+            this.MainControl.Controls.Add(this.tabAlerts);
             this.MainControl.Location = new System.Drawing.Point(2, -2);
             this.MainControl.Name = "MainControl";
             this.MainControl.SelectedIndex = 0;
-            this.MainControl.Size = new System.Drawing.Size(613, 487);
+            this.MainControl.Size = new System.Drawing.Size(614, 453);
             this.MainControl.TabIndex = 9;
             // 
             // tabPlanRoute
@@ -98,7 +113,7 @@
             this.tabPlanRoute.Location = new System.Drawing.Point(4, 22);
             this.tabPlanRoute.Name = "tabPlanRoute";
             this.tabPlanRoute.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlanRoute.Size = new System.Drawing.Size(605, 461);
+            this.tabPlanRoute.Size = new System.Drawing.Size(606, 427);
             this.tabPlanRoute.TabIndex = 0;
             this.tabPlanRoute.Text = "Search";
             this.tabPlanRoute.UseVisualStyleBackColor = true;
@@ -185,7 +200,7 @@
             this.tabTravelInfo.Location = new System.Drawing.Point(4, 22);
             this.tabTravelInfo.Name = "tabTravelInfo";
             this.tabTravelInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTravelInfo.Size = new System.Drawing.Size(605, 461);
+            this.tabTravelInfo.Size = new System.Drawing.Size(606, 427);
             this.tabTravelInfo.TabIndex = 1;
             this.tabTravelInfo.Text = "TravelInfo";
             this.tabTravelInfo.UseVisualStyleBackColor = true;
@@ -443,7 +458,7 @@
             this.info3,
             this.info2,
             this.info1});
-            this.shapeContainer1.Size = new System.Drawing.Size(599, 455);
+            this.shapeContainer1.Size = new System.Drawing.Size(600, 421);
             this.shapeContainer1.TabIndex = 0;
             this.shapeContainer1.TabStop = false;
             // 
@@ -505,7 +520,7 @@
             this.tabActualDeparture.Location = new System.Drawing.Point(4, 22);
             this.tabActualDeparture.Name = "tabActualDeparture";
             this.tabActualDeparture.Padding = new System.Windows.Forms.Padding(3);
-            this.tabActualDeparture.Size = new System.Drawing.Size(605, 461);
+            this.tabActualDeparture.Size = new System.Drawing.Size(606, 427);
             this.tabActualDeparture.TabIndex = 2;
             this.tabActualDeparture.Text = "ActualDeparture";
             this.tabActualDeparture.UseVisualStyleBackColor = true;
@@ -560,11 +575,44 @@
             this.stationLBL.TabIndex = 0;
             this.stationLBL.Text = "Station";
             // 
+            // tabAlerts
+            // 
+            this.tabAlerts.AutoScroll = true;
+            this.tabAlerts.Location = new System.Drawing.Point(4, 22);
+            this.tabAlerts.Name = "tabAlerts";
+            this.tabAlerts.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAlerts.Size = new System.Drawing.Size(606, 427);
+            this.tabAlerts.TabIndex = 3;
+            this.tabAlerts.Text = "Alerts";
+            this.tabAlerts.UseVisualStyleBackColor = true;
+            // 
+            // btnPlanRoute
+            // 
+            this.btnPlanRoute.Location = new System.Drawing.Point(270, 457);
+            this.btnPlanRoute.Name = "btnPlanRoute";
+            this.btnPlanRoute.Size = new System.Drawing.Size(75, 23);
+            this.btnPlanRoute.TabIndex = 10;
+            this.btnPlanRoute.Text = "Plan Reis";
+            this.btnPlanRoute.UseVisualStyleBackColor = true;
+            this.btnPlanRoute.Click += new System.EventHandler(this.btnPlanRoute_Click);
+            // 
+            // btnMyRoutes
+            // 
+            this.btnMyRoutes.Location = new System.Drawing.Point(351, 457);
+            this.btnMyRoutes.Name = "btnMyRoutes";
+            this.btnMyRoutes.Size = new System.Drawing.Size(75, 23);
+            this.btnMyRoutes.TabIndex = 11;
+            this.btnMyRoutes.Text = "Mijn Routes";
+            this.btnMyRoutes.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(616, 484);
+            this.Controls.Add(this.btnMyRoutes);
+            this.Controls.Add(this.btnPlanRoute);
+            this.Controls.Add(this.btnAlert);
             this.Controls.Add(this.MainControl);
             this.Name = "MainWindow";
             this.Text = "OnTime";
@@ -623,6 +671,10 @@
         private System.Windows.Forms.Label trackLabel;
         private System.Windows.Forms.Label destLBL;
         private System.Windows.Forms.Label timeLBL;
+        public System.Windows.Forms.TabPage tabAlerts;
+        private System.Windows.Forms.Button btnAlert;
+        private System.Windows.Forms.Button btnPlanRoute;
+        private System.Windows.Forms.Button btnMyRoutes;
     }
 }
 

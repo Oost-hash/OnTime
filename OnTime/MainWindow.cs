@@ -8,12 +8,14 @@ namespace OnTime
     {
         private readonly GuiControl _guiControl;
         private readonly TravelInfo _travelInfo;
+        private readonly Alerts _alerts;
 
         public MainWindow()
         {
             InitializeComponent();
              _guiControl = new GuiControl(this);
             _travelInfo = new TravelInfo(this);
+            _alerts = new Alerts(this);
 
             //Set datetimepickers to current date
             boxDate.Value = DateTime.Now;
@@ -55,6 +57,17 @@ namespace OnTime
             _travelInfo.ShowTravelOptions();
         }
 
+        private void Alerts_Click(object sender, EventArgs e)
+        {
+            tabPlanRoute.Visible = false;
+            tabAlerts.Show();
+            _alerts.GetAlerts(false, null);
+        }
+
+        private void btnPlanRoute_Click(object sender, EventArgs e)
+        {
+            tabPlanRoute.Show();
+        }
     }
 }
 

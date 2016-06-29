@@ -55,10 +55,31 @@ namespace OnTime
 
         public XmlDocument Disruptions(string station, bool actual, bool unplannend)
         {
-            string url = $"{BaseUrl}storingen?station={station}&actual={actual}&unplanned={unplannend}";
+            string url = $"{BaseUrl}storingen?";
+            if (station != null)
+            {
+                url += $"&station={station}";
+            }
+            if (actual)
+            {
+                url += "&actual=true";
+            }
+            else
+            {
+                url += "&actual=false";
+            }
+            if (unplannend)
+            {
+                url += "&unplanned=true";
+            }
+            else
+            {
+                url += "&unplanned=true";
+            }
 
             return ApiCall(url);
         }
+
 
         public XmlDocument TravelAdvice(string from, string to, string via, string dateTime, bool departure, int previousAdvices, int nextAdvices)
         {
