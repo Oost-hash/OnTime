@@ -24,6 +24,34 @@ namespace OnTime
             _main = main;
         }
 
+        public string FindAlert(string id)
+        {
+            _alerts = _api.Disruptions(null, true, true);
+            XmlNodeList alertsOngepland = _alerts.SelectNodes("Storingen/Ongepland/Storing");
+            XmlNodeList alertsGepland = _alerts.SelectNodes("Storingen/Gepland/Storing");
+            string message= "";
+
+            if (alertsOngepland != null)
+                foreach (XmlNode alert in alertsGepland)
+                {
+                    string checkid = alert["id"]?.InnerText;
+                    if (id.Equals(checkid))
+                    {
+                        message = alert["Bericht"]?.InnerText;
+                    }
+                }
+
+            if (message != null)
+            {
+                message = message.Replace("<br/>", "");
+                message = message.Replace("<b>", "");
+                message = message.Replace("</b>", "");
+                message = message.Replace("<p>", "");
+                message = message.Replace("</p>", "");    
+            }
+            return message;
+        }
+
         public void GetAlerts(bool station, string stationname)
         {
             if (station)
@@ -394,7 +422,7 @@ namespace OnTime
                 adviceLabel.MouseLeave += (s, e) => { adviceLabel.ForeColor = Color.FromArgb(0, 154, 224); };
 
                 //Add labels to the lists
-                _adviceList.Add(messageLabel);
+                _adviceList.Add(adviceLabel);
 
                 _main.tabAlerts.Controls.Add(adviceLabel);
             }
@@ -407,34 +435,23 @@ namespace OnTime
 
             _main.tabAlerts.VerticalScroll.Value = 0;
 
-            for (int i = 0; i <= _messageList.Count - 1; i++)
+            for (int i = 0; i < _trajectList.Count; i++)
             {
                 //Remove labels form controls
-                if (i < _plannendList.Count)
-                {
-                    _main.tabTravelInfo.Controls.Remove(_plannendList[i]);
-
-                    _plannendList[i].Dispose();
-                }
-                _main.tabTravelInfo.Controls.Remove(_trajectList[i]);
-                _main.tabTravelInfo.Controls.Remove(_reasonList[i]);
-                _main.tabTravelInfo.Controls.Remove(_periodList[i]);
-                _main.tabTravelInfo.Controls.Remove(_causeList[i]);
+                if (i < _plannendList.Count){_main.tabTravelInfo.Controls.Remove(_plannendList[i]); _plannendList[i].Dispose();}
+                if (i < _reasonList.Count) { _main.tabTravelInfo.Controls.Remove(_reasonList[i]); _reasonList[i].Dispose(); }  
+                if (i < _periodList.Count) { _main.tabTravelInfo.Controls.Remove(_periodList[i]); _periodList[i].Dispose(); }               
+                if (i < _causeList.Count) { _main.tabTravelInfo.Controls.Remove(_causeList[i]); _causeList[i].Dispose(); }
                 if (i < _dateList.Count) { _main.tabTravelInfo.Controls.Remove(_dateList[i]); _dateList[i].Dispose(); }
-                _main.tabTravelInfo.Controls.Remove(_delayList[i]);
-                _main.tabTravelInfo.Controls.Remove(_messageList[i]);
-                if(i < _adviceList.Count) { _main.tabTravelInfo.Controls.Remove(_adviceList[i]); _adviceList[i].Dispose(); }
+                if (i < _delayList.Count) { _main.tabTravelInfo.Controls.Remove(_delayList[i]); _delayList[i].Dispose(); }
+                if (i < _messageList.Count) { _main.tabTravelInfo.Controls.Remove(_messageList[i]); _messageList[i].Dispose(); }
+                if (i < _adviceList.Count) { _main.tabTravelInfo.Controls.Remove(_adviceList[i]); _adviceList[i].Dispose(); }
 
-                //Dispose of labels
+                _main.tabTravelInfo.Controls.Remove(_trajectList[i]);
                 _trajectList[i].Dispose();
-                _reasonList[i].Dispose();
-                _periodList[i].Dispose();
-                _causeList[i].Dispose();
-                _delayList[i].Dispose();
-                _messageList[i].Dispose();
 
                 //Empty Lists and reset variables
-                if (i == _messageList.Count)
+                if (i == _trajectList.Count)
                 {
                     _plannendList.Clear();
                     _reasonList.Clear();

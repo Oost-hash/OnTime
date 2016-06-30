@@ -5,9 +5,14 @@ namespace OnTime
 {
     public partial class AddRoute : Form
     {
+
+        private readonly Database _db;
+
         public AddRoute()
         {
             InitializeComponent();
+            _db = new Database();
+
 
             //Clear errors
             lblError1.Visible = false;
@@ -70,10 +75,9 @@ namespace OnTime
             //No errors? Then insert values to database
             if (error == false)
             {
-                Database.InsertData(txtbFrom.Text, txtbTo.Text, arrivalTime, departureTime, price);
+                _db.InsertData(txtbFrom.Text, txtbTo.Text, arrivalTime, departureTime, price);
                 Close();
             }
-
         }
     }
 }
