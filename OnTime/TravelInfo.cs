@@ -14,6 +14,7 @@ namespace OnTime
         private readonly List<Label> _timeList = new List<Label>();
         private readonly List<Label> _stationList = new List<Label>();
         private readonly List<Label> _trackNrList = new List<Label>();
+        private readonly List<Label> _alertList = new List<Label>();
 
         //Start cordinates headerinfo and stationinfo
         private int _headerY = 150;
@@ -38,15 +39,23 @@ namespace OnTime
             _guiControl = new GuiControl(_main);
         }
 
-        public void ShowTravelOptions()
+        public void ShowTravelOptions(string from, string to, string via, bool difTime, string difDate)
         {
-            //Set the date
-            var rawDate = DateTime.Parse(_main.boxDate.Text);
-            var time = _main.cbPlHour.Text + ":" + _main.cbPlMin.Text;
-            var date = rawDate.ToString("yyyy-MM-dd") + "T" + time;
+            if (!difTime)
+            {
+                //Set the date
+                var rawDate = DateTime.Parse(_main.boxDate.Text);
+                var time = _main.cbPlHour.Text + ":" + _main.cbPlMin.Text;
+                var date = rawDate.ToString("yyyy-MM-dd") + "T" + time;
 
-            //Call api and get info
-            _data = _api.TravelAdvice("Amsterdam", "emmen", null, date, false, 0, 3);
+                //Call api and get info
+                _data = _api.TravelAdvice(from, to, via, date, false, 0, 3);
+            }
+            else
+            {
+                _data = _api.TravelAdvice(from, to, via, difDate, false, 0, 3);
+            }
+            
             int i = 1;
             XmlNodeList nodeList = _data.SelectNodes("ReisMogelijkheden/ReisMogelijkheid");
 
@@ -95,20 +104,35 @@ namespace OnTime
                 {
                     if (i == x)
                     {
+
+                        string id = null;
+                        string message = null;
+
+                        if (travelOption["Melding"] != null)
+                        {
+                            var alerts = travelOption.SelectNodes("Melding");
+                            if (alerts != null)
+                                foreach (XmlNode alert in alerts)
+                                {
+                                    id = alert["Id"]?.InnerText;
+                                    message = alert["Text"]?.InnerText;
+                                }
+                        }
+
                         //Go to parse info
-                        ParseInfo(travelOption);
+                        ParseInfo(travelOption, id, message);
 
                         //Set the departue label text
                         DateTime departureDate = DateTime.Parse(travelOption["ActueleVertrekTijd"]?.InnerText);
                         string departureTime = travelOption["ActueleVertrekTijd"]?.InnerText.Substring(11, 5);
-                        _main.dptLBLBig.Text = @"Vertrek " + departureDate.ToString("dddd dd MMMM yyyy") + @" om " + departureTime;
+                        _main.dptLBLBig.Text = @"Vertrek " + departureDate.ToString("dddd dd MMMM yyyy") + @" om " + departureTime;                        
                     }
                     i++;
                 }
             _clearInfo = true;
         }
 
-        public void ParseInfo(XmlNode travelOption)
+        public void ParseInfo(XmlNode travelOption, string id, string message)
         {
             bool first = true;
             string strOne = "";
@@ -130,11 +154,12 @@ namespace OnTime
                             station = travelStop["Naam"]?.InnerText;
                             string time = travelStop["Tijd"]?.InnerText;
                             string trackNr = travelStop["Spoor"]?.InnerText;
-
+                            
+                            
                             //Print first station
                             if (countStations == 0)
                             {
-                                PrintTravelOption(station, time, trackNr, carrier, transportType);
+                                PrintTravelOption(station, time, trackNr, carrier, transportType, id, message);
                                 if (first)
                                 {
                                     strOne = station;
@@ -144,7 +169,7 @@ namespace OnTime
                             //Print last Station
                             else if (countStations == travelStops.Count - 1)
                             {
-                                PrintTravelOption(station, time, trackNr, null, null);
+                                PrintTravelOption(station, time, trackNr, null, null, null, null);
                             }
                             countStations++;
                         }
@@ -152,7 +177,7 @@ namespace OnTime
                 }
         }
 
-        public void PrintTravelOption(string station, string time, string trackNr, string carrier, string transportType)
+        public void PrintTravelOption(string station, string time, string trackNr, string carrier, string transportType, string id, string message)
         {
 
             if (_clearInfo)
@@ -163,6 +188,34 @@ namespace OnTime
 
             //Set StationNames
             _main.stationNamesLBL.Text = _main.boxDepartue.Text + @" ➜ " + _main.boxArrival.Text;
+
+            if (id != null)
+            {
+                // Print alert label
+                Label alertLabel = new Label
+                {
+                    Location = new Point(232, _headerY),
+                    Size = new Size(200, 18),
+                    Font = new Font("Open Sans", 9, FontStyle.Bold),
+                    ForeColor = Color.DarkOrange,
+                    Cursor = Cursors.Hand,
+                    Text = message
+                };
+                alertLabel.Click += (s, e) =>
+                {
+                    Alerts alert = new Alerts(_main);
+                    MessageBox.Show(alert.FindAlert(id));
+                };
+
+                alertLabel.MouseEnter += (s, e) => { alertLabel.ForeColor = Color.Black; };
+                alertLabel.MouseLeave += (s, e) => { alertLabel.ForeColor = Color.DarkOrange; };
+
+                _alertList.Add(alertLabel);
+                _main.tabTravelInfo.Controls.Add(alertLabel);
+
+                _headerY += 20;
+                _infoY += 20;
+            }
 
             //Print header if not null
             if (carrier != null && transportType != null)
@@ -265,6 +318,11 @@ namespace OnTime
                     _transportTypeList[i].Dispose();
                     _carrierList[i].Dispose();
                 }
+                if (i < _alertList.Count)
+                {
+                    _main.tabTravelInfo.Controls.Remove(_alertList[i]);
+                    _alertList[i].Dispose();
+                }
                 _main.tabTravelInfo.Controls.Remove(_timeList[i]);
                 _main.tabTravelInfo.Controls.Remove(_stationList[i]);
                 _main.tabTravelInfo.Controls.Remove(_trackNrList[i]);
@@ -282,6 +340,7 @@ namespace OnTime
                     _timeList.Clear();
                     _stationList.Clear();
                     _trackNrList.Clear();
+                    _alertList.Clear();
                 }
 
                 _headerY = 150;

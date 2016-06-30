@@ -7,7 +7,7 @@ namespace OnTime
     {
 
         //Fields for Database connection
-        private static MySqlConnection _conn;
+        private MySqlConnection _conn;
         private const string MyConnectionString = "server=127.0.0.1;uid=root;pwd=;database=ontime;";
 
         public Database()
@@ -18,7 +18,7 @@ namespace OnTime
         /// <summary>
         /// Open database connection
         /// </summary>
-        public static MySqlConnection DatabaseConection()
+        public void DatabaseConection()
         {
             try
             {
@@ -31,16 +31,13 @@ namespace OnTime
                 //catch errors
                 MessageBox.Show(ex.Message);
             }
-
-            return _conn;
         }
 
         /// <summary>
         /// Insert data into database
         /// </summary>
-        public static void InsertData(string from, string to, string arrival, string departure, int price)
+        public void InsertData(string from, string to, string arrival, string departure, int price)
         {
-            DatabaseConection();
             //Make query and excute query
             string query = $"INSERT INTO `routes`(`ID`, `departure`, `arrival`, `price`, `arrivalTime`, `departureTime`) VALUES ('NULL', '{from}', '{to}', '{price}' ,'{arrival}', '{departure}')";
             MySqlCommand command = new MySqlCommand(query, _conn);

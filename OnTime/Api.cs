@@ -88,7 +88,8 @@ namespace OnTime
             if (via != null)
             {
                 url += $"&viaStation={via}";
-            } else if (dateTime != null)
+            }
+            if (dateTime != null)
             {
                 url += $"&dateTime={dateTime}";
             }

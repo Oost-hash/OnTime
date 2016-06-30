@@ -10,6 +10,8 @@ namespace OnTime
         private readonly TravelInfo _travelInfo;
         private readonly Alerts _alerts;
 
+        private DateTime _time;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -23,6 +25,10 @@ namespace OnTime
             //Sets global font to Open Sans
             Font = new Font("Open Sans", 8, FontStyle.Regular);
 
+            //error lbls
+            lblError1.Visible = false;
+            lblError2.Visible = false;
+            lblError3.Visible = false;
         }
 
         private void info1_click(object sender, EventArgs e)
@@ -52,13 +58,72 @@ namespace OnTime
 
         private void btnTravelAdvice_Click(object sender, EventArgs e)
         {
-            tabPlanRoute.Visible = false;
-            tabTravelInfo.Show();
-            _travelInfo.ShowTravelOptions();
+            //Fields neccery voor error checking
+            bool error = false;
+
+            int i;
+
+            //Clear errors
+            lblError1.Visible = false;
+            lblError2.Visible = false;
+
+            //checks if not empty or any numbers
+            if (string.IsNullOrWhiteSpace(boxDepartue.Text))
+            {
+                lblError1.Text = @"Vul een plaats in";
+                lblError1.Visible = true;
+                error = true;
+            }
+            else if (int.TryParse(boxDepartue.Text, out i))
+            {
+                lblError1.Text = @"Vul een plaats in";
+                lblError1.Visible = true;
+                error = true;
+            }
+
+            //checks if not empty or any numbers
+            if (string.IsNullOrWhiteSpace(boxArrival.Text))
+            {
+                lblError2.Text = @"Vul een plaats in";
+                lblError2.Visible = true;
+                error = true;
+            }
+            else if (int.TryParse(boxArrival.Text, out i))
+            {
+                lblError2.Text = @"Vul een plaats in";
+                lblError2.Visible = true;
+                error = true;
+            }
+
+
+            if (int.TryParse(boxVia.Text, out i))
+            {
+                lblError3.Text = @"Vul een plaats in";
+                lblError3.Visible = true;
+                error = true;
+            }
+
+            if (!error)
+            {
+                if (string.IsNullOrWhiteSpace(boxVia.Text))
+                {
+                    _travelInfo.ShowTravelOptions(boxDepartue.Text, boxArrival.Text, boxVia.Text, false, null);
+                }
+                else
+                {
+                    _travelInfo.ShowTravelOptions(boxDepartue.Text, boxArrival.Text, null, false, null);
+                }
+
+                tabPlanRoute.Visible = false;
+                tabTravelInfo.Show();
+
+                _time = DateTime.Parse(cbPlHour.Text + ":" + cbPlMin.Text);
+            }
         }
 
         private void Alerts_Click(object sender, EventArgs e)
         {
+            tabOnTime.Visible = false;
             tabPlanRoute.Visible = false;
             tabActualDeparture.Visible = false;
             tabTravelInfo.Visible = false;
@@ -89,10 +154,45 @@ namespace OnTime
 
         private void btnMyRoutes_Click(object sender, EventArgs e)
         {
+            tabAlerts.Visible = false;
             tabPlanRoute.Visible = false;
             tabActualDeparture.Visible = false;
             tabTravelInfo.Visible = false;
             tabOnTime.Show();
+        }
+
+        private void EarlierTravelOpt(object sender, EventArgs e)
+        {
+            var rawDate = DateTime.Parse(boxDate.Text);
+            _time = _time.AddHours(-1);
+
+            var date = rawDate.ToString("yyyy-MM-dd") + "T" + _time.ToString("HH:mm");
+
+            if (string.IsNullOrWhiteSpace(boxVia.Text))
+            {
+                _travelInfo.ShowTravelOptions(boxDepartue.Text, boxArrival.Text, boxVia.Text, true, date);
+            }
+            else
+            {
+                _travelInfo.ShowTravelOptions(boxDepartue.Text, boxArrival.Text, null, true, date);
+            }
+        }
+
+        private void LaterTravelOpt(object sender, EventArgs e)
+        {
+            var rawDate = DateTime.Parse(boxDate.Text);
+            _time = _time.AddHours(1);
+
+            var date = rawDate.ToString("yyyy-MM-dd") + "T" + _time.ToString("HH:mm");
+
+            if (string.IsNullOrWhiteSpace(boxVia.Text))
+            {
+                _travelInfo.ShowTravelOptions(boxDepartue.Text, boxArrival.Text, boxVia.Text, true, date);
+            }
+            else
+            {
+                _travelInfo.ShowTravelOptions(boxDepartue.Text, boxArrival.Text, null, true, date);
+            }
         }
     }
 }
