@@ -11,3 +11,15 @@ D:\GitHub\OnTime\OnTime\obj\Debug\OnTime.MainWindow.resources
 D:\GitHub\OnTime\OnTime\obj\Debug\OnTime.csprojResolveAssemblyReference.cache
 D:\GitHub\OnTime\OnTime\obj\Debug\OnTime.AddRoute.resources
 D:\GitHub\OnTime\OnTime\bin\Debug\MySql.Data.dll
+C:\Users\Tux00\Source\Repos\OnTime\OnTime\bin\Debug\OnTime.exe.config
+C:\Users\Tux00\Source\Repos\OnTime\OnTime\obj\Debug\OnTime.exe
+C:\Users\Tux00\Source\Repos\OnTime\OnTime\obj\Debug\OnTime.pdb
+C:\Users\Tux00\Source\Repos\OnTime\OnTime\bin\Debug\OnTime.exe
+C:\Users\Tux00\Source\Repos\OnTime\OnTime\bin\Debug\OnTime.pdb
+C:\Users\Tux00\Source\Repos\OnTime\OnTime\bin\Debug\MySql.Data.dll
+C:\Users\Tux00\Source\Repos\OnTime\OnTime\bin\Debug\Microsoft.VisualBasic.PowerPacks.xml
+C:\Users\Tux00\Source\Repos\OnTime\OnTime\obj\Debug\OnTime.csprojResolveAssemblyReference.cache
+C:\Users\Tux00\Source\Repos\OnTime\OnTime\obj\Debug\OnTime.AddRoute.resources
+C:\Users\Tux00\Source\Repos\OnTime\OnTime\obj\Debug\OnTime.MainWindow.resources
+C:\Users\Tux00\Source\Repos\OnTime\OnTime\obj\Debug\OnTime.Properties.Resources.resources
+C:\Users\Tux00\Source\Repos\OnTime\OnTime\obj\Debug\OnTime.csproj.GenerateResource.Cache
