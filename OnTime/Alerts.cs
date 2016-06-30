@@ -11,7 +11,7 @@ namespace OnTime
         private readonly Api _api;
         private XmlDocument _alerts;
         private readonly MainWindow _main;
-        private int _infoY = 98;
+        private int _infoY = 50;
 
         //for printing the plannend or unplannend header
         private bool _first = true;
@@ -28,7 +28,7 @@ namespace OnTime
         {
             if (station)
             {
-                _alerts = _api.Disruptions(_main.boxDepartue.Text, true, true);
+                _alerts = _api.Disruptions(stationname, true, true);
                 XmlNodeList alertsOngepland = _alerts.SelectNodes("Storingen/Ongepland/Storing");
                 XmlNodeList alertsGepland = _alerts.SelectNodes("Storingen/Gepland/Storing");
                 if (alertsOngepland != null)
@@ -446,7 +446,7 @@ namespace OnTime
                     _adviceList.Clear();
                 }
 
-                _infoY = 98;
+                _infoY = 50;
             }
         }
     }

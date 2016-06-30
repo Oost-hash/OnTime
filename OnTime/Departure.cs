@@ -22,7 +22,7 @@ namespace OnTime
         private readonly List<Label> _routeList = new List<Label>();
 
         //Start cordinates
-        private int _infoY = 145;
+        private int _infoY = 110;
 
         public Departure(MainWindow main)
         {
@@ -65,7 +65,7 @@ namespace OnTime
             // Print the time label
             Label timeLabel = new Label
             {
-                Location = new Point(120, _infoY),
+                Location = new Point(68, _infoY),
                 Size = new Size(50, 18),
                 Font = new Font("Open Sans", 9, FontStyle.Bold),
                 Text = time.Substring(11, 5)
@@ -75,7 +75,7 @@ namespace OnTime
             // Print the direction label
             Label directionLabel = new Label
             {
-                Location = new Point(186, _infoY),
+                Location = new Point(134, _infoY),
                 Size = new Size(120, 18),
                 Font = new Font("Open Sans", 9),
                 Text = direction
@@ -85,7 +85,7 @@ namespace OnTime
             // Print the track label
             Label trackLabel = new Label
             {
-                Location = new Point(324, _infoY),
+                Location = new Point(272, _infoY),
                 Size = new Size(120, 18),
                 Font = new Font("Open Sans", 9),
                 Text = track
@@ -95,8 +95,8 @@ namespace OnTime
             // Print the carrier label
             Label carrierLabel = new Label
             {
-                Location = new Point(450, _infoY),
-                Size = new Size(80, 18),
+                Location = new Point(398, _infoY),
+                Size = new Size(60, 18),
                 Font = new Font("Open Sans", 9),
                 Text = carrier
             };
@@ -105,7 +105,7 @@ namespace OnTime
             // Print the route label
             Label routeLabel = new Label
             {
-                Location = new Point(529, _infoY),
+                Location = new Point(460, _infoY),
                 Size = new Size(80, 18),
                 Font = new Font("Open Sans", 9),
                 ForeColor = Color.FromArgb(0, 154, 224),

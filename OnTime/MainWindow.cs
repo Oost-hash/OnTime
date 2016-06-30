@@ -60,6 +60,8 @@ namespace OnTime
         private void Alerts_Click(object sender, EventArgs e)
         {
             tabPlanRoute.Visible = false;
+            tabActualDeparture.Visible = false;
+            tabTravelInfo.Visible = false;
             tabAlerts.Show();
             _alerts.GetAlerts(false, null);
         }
@@ -67,6 +69,16 @@ namespace OnTime
         private void btnPlanRoute_Click(object sender, EventArgs e)
         {
             tabPlanRoute.Show();
+        }
+
+        private void labelBack_Click(object sender, EventArgs e)
+        {
+            tabTravelInfo.Show();
+        }
+
+        private void btnZoek_Click(object sender, EventArgs e)
+        {
+            _alerts.GetAlerts(true, txtbCity.Text);
         }
     }
 }

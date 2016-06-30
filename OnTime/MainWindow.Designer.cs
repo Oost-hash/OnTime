@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.btnAlert = new System.Windows.Forms.Button();
+            this.btnPlanRoute = new System.Windows.Forms.Button();
+            this.btnMyRoutes = new System.Windows.Forms.Button();
             this.MainControl = new OnTime.TabControlHeaders();
             this.tabPlanRoute = new System.Windows.Forms.TabPage();
             this.boxTime = new System.Windows.Forms.DateTimePicker();
@@ -37,6 +39,9 @@
             this.btnTravelAdvice = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.boxArrival = new System.Windows.Forms.TextBox();
+            this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabTravelInfo = new System.Windows.Forms.TabPage();
             this.dptLBLBig = new System.Windows.Forms.Label();
             this.stationNamesLBL = new System.Windows.Forms.Label();
@@ -66,18 +71,24 @@
             this.info2 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.info1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.tabActualDeparture = new System.Windows.Forms.TabPage();
+            this.lblVertrek = new System.Windows.Forms.Label();
+            this.labelBack = new System.Windows.Forms.Label();
             this.carrierLabel = new System.Windows.Forms.Label();
             this.trackLabel = new System.Windows.Forms.Label();
             this.destLBL = new System.Windows.Forms.Label();
             this.timeLBL = new System.Windows.Forms.Label();
             this.stationLBL = new System.Windows.Forms.Label();
             this.tabAlerts = new System.Windows.Forms.TabPage();
-            this.btnPlanRoute = new System.Windows.Forms.Button();
-            this.btnMyRoutes = new System.Windows.Forms.Button();
+            this.lblCity = new System.Windows.Forms.Label();
+            this.btnZoek = new System.Windows.Forms.Button();
+            this.txtbCity = new System.Windows.Forms.TextBox();
+            this.lblVerstoringen = new System.Windows.Forms.Label();
             this.MainControl.SuspendLayout();
             this.tabPlanRoute.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabTravelInfo.SuspendLayout();
             this.tabActualDeparture.SuspendLayout();
+            this.tabAlerts.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAlert
@@ -90,16 +101,35 @@
             this.btnAlert.UseVisualStyleBackColor = true;
             this.btnAlert.Click += new System.EventHandler(this.Alerts_Click);
             // 
+            // btnPlanRoute
+            // 
+            this.btnPlanRoute.Location = new System.Drawing.Point(270, 457);
+            this.btnPlanRoute.Name = "btnPlanRoute";
+            this.btnPlanRoute.Size = new System.Drawing.Size(75, 23);
+            this.btnPlanRoute.TabIndex = 10;
+            this.btnPlanRoute.Text = "Plan Reis";
+            this.btnPlanRoute.UseVisualStyleBackColor = true;
+            this.btnPlanRoute.Click += new System.EventHandler(this.btnPlanRoute_Click);
+            // 
+            // btnMyRoutes
+            // 
+            this.btnMyRoutes.Location = new System.Drawing.Point(351, 457);
+            this.btnMyRoutes.Name = "btnMyRoutes";
+            this.btnMyRoutes.Size = new System.Drawing.Size(75, 23);
+            this.btnMyRoutes.TabIndex = 11;
+            this.btnMyRoutes.Text = "Mijn Routes";
+            this.btnMyRoutes.UseVisualStyleBackColor = true;
+            // 
             // MainControl
             // 
             this.MainControl.Controls.Add(this.tabPlanRoute);
             this.MainControl.Controls.Add(this.tabTravelInfo);
             this.MainControl.Controls.Add(this.tabActualDeparture);
             this.MainControl.Controls.Add(this.tabAlerts);
-            this.MainControl.Location = new System.Drawing.Point(2, -2);
+            this.MainControl.Location = new System.Drawing.Point(-6, -2);
             this.MainControl.Name = "MainControl";
             this.MainControl.SelectedIndex = 0;
-            this.MainControl.Size = new System.Drawing.Size(614, 453);
+            this.MainControl.Size = new System.Drawing.Size(606, 453);
             this.MainControl.TabIndex = 9;
             // 
             // tabPlanRoute
@@ -110,10 +140,12 @@
             this.tabPlanRoute.Controls.Add(this.btnTravelAdvice);
             this.tabPlanRoute.Controls.Add(this.textBox2);
             this.tabPlanRoute.Controls.Add(this.boxArrival);
+            this.tabPlanRoute.Controls.Add(this.shapeContainer2);
+            this.tabPlanRoute.Controls.Add(this.pictureBox1);
             this.tabPlanRoute.Location = new System.Drawing.Point(4, 22);
             this.tabPlanRoute.Name = "tabPlanRoute";
             this.tabPlanRoute.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlanRoute.Size = new System.Drawing.Size(606, 427);
+            this.tabPlanRoute.Size = new System.Drawing.Size(598, 427);
             this.tabPlanRoute.TabIndex = 0;
             this.tabPlanRoute.Text = "Search";
             this.tabPlanRoute.UseVisualStyleBackColor = true;
@@ -122,7 +154,7 @@
             // 
             this.boxTime.CustomFormat = "HH:MM";
             this.boxTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.boxTime.Location = new System.Drawing.Point(192, 248);
+            this.boxTime.Location = new System.Drawing.Point(320, 250);
             this.boxTime.Name = "boxTime";
             this.boxTime.ShowUpDown = true;
             this.boxTime.Size = new System.Drawing.Size(58, 20);
@@ -132,25 +164,29 @@
             // 
             this.boxDate.CustomFormat = "dd-MM-yyyy";
             this.boxDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.boxDate.Location = new System.Drawing.Point(112, 248);
+            this.boxDate.Location = new System.Drawing.Point(240, 250);
             this.boxDate.Name = "boxDate";
             this.boxDate.Size = new System.Drawing.Size(74, 20);
             this.boxDate.TabIndex = 4;
             // 
             // boxDepartue
             // 
-            this.boxDepartue.Location = new System.Drawing.Point(130, 148);
+            this.boxDepartue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.boxDepartue.ForeColor = System.Drawing.Color.DarkGray;
+            this.boxDepartue.Location = new System.Drawing.Point(240, 150);
             this.boxDepartue.Name = "boxDepartue";
-            this.boxDepartue.Size = new System.Drawing.Size(100, 20);
+            this.boxDepartue.Size = new System.Drawing.Size(138, 20);
             this.boxDepartue.TabIndex = 0;
+            this.boxDepartue.Text = "Van";
+            this.boxDepartue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnTravelAdvice
             // 
-            this.btnTravelAdvice.BackColor = System.Drawing.Color.OrangeRed;
+            this.btnTravelAdvice.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnTravelAdvice.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTravelAdvice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTravelAdvice.ForeColor = System.Drawing.Color.White;
-            this.btnTravelAdvice.Location = new System.Drawing.Point(130, 274);
+            this.btnTravelAdvice.Location = new System.Drawing.Point(258, 276);
             this.btnTravelAdvice.Name = "btnTravelAdvice";
             this.btnTravelAdvice.Size = new System.Drawing.Size(102, 23);
             this.btnTravelAdvice.TabIndex = 3;
@@ -160,17 +196,53 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(130, 187);
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox2.ForeColor = System.Drawing.Color.DarkGray;
+            this.textBox2.Location = new System.Drawing.Point(240, 189);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.Size = new System.Drawing.Size(138, 20);
             this.textBox2.TabIndex = 1;
+            this.textBox2.Text = "Via";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // boxArrival
             // 
-            this.boxArrival.Location = new System.Drawing.Point(130, 222);
+            this.boxArrival.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.boxArrival.ForeColor = System.Drawing.Color.DarkGray;
+            this.boxArrival.Location = new System.Drawing.Point(240, 224);
             this.boxArrival.Name = "boxArrival";
-            this.boxArrival.Size = new System.Drawing.Size(100, 20);
+            this.boxArrival.Size = new System.Drawing.Size(138, 20);
             this.boxArrival.TabIndex = 2;
+            this.boxArrival.Text = "Naar";
+            this.boxArrival.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // shapeContainer2
+            // 
+            this.shapeContainer2.Location = new System.Drawing.Point(3, 3);
+            this.shapeContainer2.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer2.Name = "shapeContainer2";
+            this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.rectangleShape1});
+            this.shapeContainer2.Size = new System.Drawing.Size(592, 421);
+            this.shapeContainer2.TabIndex = 7;
+            this.shapeContainer2.TabStop = false;
+            // 
+            // rectangleShape1
+            // 
+            this.rectangleShape1.FillColor = System.Drawing.Color.White;
+            this.rectangleShape1.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
+            this.rectangleShape1.Location = new System.Drawing.Point(208, 123);
+            this.rectangleShape1.Name = "rectangleShape1";
+            this.rectangleShape1.Size = new System.Drawing.Size(192, 194);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::OnTime.Properties.Resources.train2;
+            this.pictureBox1.Location = new System.Drawing.Point(-4, -3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(632, 427);
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
             // 
             // tabTravelInfo
             // 
@@ -200,7 +272,7 @@
             this.tabTravelInfo.Location = new System.Drawing.Point(4, 22);
             this.tabTravelInfo.Name = "tabTravelInfo";
             this.tabTravelInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTravelInfo.Size = new System.Drawing.Size(606, 427);
+            this.tabTravelInfo.Size = new System.Drawing.Size(598, 427);
             this.tabTravelInfo.TabIndex = 1;
             this.tabTravelInfo.Text = "TravelInfo";
             this.tabTravelInfo.UseVisualStyleBackColor = true;
@@ -229,7 +301,7 @@
             this.dptLBL1.AutoSize = true;
             this.dptLBL1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dptLBL1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dptLBL1.Location = new System.Drawing.Point(21, 30);
+            this.dptLBL1.Location = new System.Drawing.Point(27, 66);
             this.dptLBL1.Name = "dptLBL1";
             this.dptLBL1.Size = new System.Drawing.Size(159, 17);
             this.dptLBL1.TabIndex = 21;
@@ -240,7 +312,7 @@
             // 
             this.LBLsw4.AutoSize = true;
             this.LBLsw4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LBLsw4.Location = new System.Drawing.Point(21, 403);
+            this.LBLsw4.Location = new System.Drawing.Point(27, 338);
             this.LBLsw4.Name = "LBLsw4";
             this.LBLsw4.Size = new System.Drawing.Size(74, 13);
             this.LBLsw4.TabIndex = 37;
@@ -251,7 +323,7 @@
             // 
             this.LBLsw2.AutoSize = true;
             this.LBLsw2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LBLsw2.Location = new System.Drawing.Point(21, 174);
+            this.LBLsw2.Location = new System.Drawing.Point(27, 174);
             this.LBLsw2.Name = "LBLsw2";
             this.LBLsw2.Size = new System.Drawing.Size(74, 13);
             this.LBLsw2.TabIndex = 27;
@@ -262,7 +334,7 @@
             // 
             this.LBLtt2.AutoSize = true;
             this.LBLtt2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LBLtt2.Location = new System.Drawing.Point(21, 199);
+            this.LBLtt2.Location = new System.Drawing.Point(27, 193);
             this.LBLtt2.Name = "LBLtt2";
             this.LBLtt2.Size = new System.Drawing.Size(72, 13);
             this.LBLtt2.TabIndex = 30;
@@ -273,7 +345,7 @@
             // 
             this.trtLBL3.AutoSize = true;
             this.trtLBL3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.trtLBL3.Location = new System.Drawing.Point(101, 312);
+            this.trtLBL3.Location = new System.Drawing.Point(107, 274);
             this.trtLBL3.Name = "trtLBL3";
             this.trtLBL3.Size = new System.Drawing.Size(36, 13);
             this.trtLBL3.TabIndex = 34;
@@ -284,7 +356,7 @@
             // 
             this.swLBL1.AutoSize = true;
             this.swLBL1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.swLBL1.Location = new System.Drawing.Point(101, 60);
+            this.swLBL1.Location = new System.Drawing.Point(107, 93);
             this.swLBL1.Name = "swLBL1";
             this.swLBL1.Size = new System.Drawing.Size(32, 13);
             this.swLBL1.TabIndex = 23;
@@ -295,7 +367,7 @@
             // 
             this.LBLtt4.AutoSize = true;
             this.LBLtt4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LBLtt4.Location = new System.Drawing.Point(21, 428);
+            this.LBLtt4.Location = new System.Drawing.Point(27, 356);
             this.LBLtt4.Name = "LBLtt4";
             this.LBLtt4.Size = new System.Drawing.Size(72, 13);
             this.LBLtt4.TabIndex = 40;
@@ -306,7 +378,7 @@
             // 
             this.trtLBL1.AutoSize = true;
             this.trtLBL1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.trtLBL1.Location = new System.Drawing.Point(101, 85);
+            this.trtLBL1.Location = new System.Drawing.Point(107, 113);
             this.trtLBL1.Name = "trtLBL1";
             this.trtLBL1.Size = new System.Drawing.Size(36, 13);
             this.trtLBL1.TabIndex = 24;
@@ -317,7 +389,7 @@
             // 
             this.swLBL3.AutoSize = true;
             this.swLBL3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.swLBL3.Location = new System.Drawing.Point(101, 287);
+            this.swLBL3.Location = new System.Drawing.Point(107, 255);
             this.swLBL3.Name = "swLBL3";
             this.swLBL3.Size = new System.Drawing.Size(32, 13);
             this.swLBL3.TabIndex = 33;
@@ -329,7 +401,7 @@
             this.dptLBL3.AutoSize = true;
             this.dptLBL3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dptLBL3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dptLBL3.Location = new System.Drawing.Point(21, 257);
+            this.dptLBL3.Location = new System.Drawing.Point(27, 233);
             this.dptLBL3.Name = "dptLBL3";
             this.dptLBL3.Size = new System.Drawing.Size(159, 17);
             this.dptLBL3.TabIndex = 31;
@@ -341,7 +413,7 @@
             this.dptLBL2.AutoSize = true;
             this.dptLBL2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dptLBL2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dptLBL2.Location = new System.Drawing.Point(21, 144);
+            this.dptLBL2.Location = new System.Drawing.Point(27, 148);
             this.dptLBL2.Name = "dptLBL2";
             this.dptLBL2.Size = new System.Drawing.Size(159, 17);
             this.dptLBL2.TabIndex = 26;
@@ -352,7 +424,7 @@
             // 
             this.swLBL4.AutoSize = true;
             this.swLBL4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.swLBL4.Location = new System.Drawing.Point(101, 403);
+            this.swLBL4.Location = new System.Drawing.Point(107, 338);
             this.swLBL4.Name = "swLBL4";
             this.swLBL4.Size = new System.Drawing.Size(32, 13);
             this.swLBL4.TabIndex = 38;
@@ -363,7 +435,7 @@
             // 
             this.trtLBL2.AutoSize = true;
             this.trtLBL2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.trtLBL2.Location = new System.Drawing.Point(101, 199);
+            this.trtLBL2.Location = new System.Drawing.Point(107, 193);
             this.trtLBL2.Name = "trtLBL2";
             this.trtLBL2.Size = new System.Drawing.Size(36, 13);
             this.trtLBL2.TabIndex = 29;
@@ -375,7 +447,7 @@
             this.dptLBL4.AutoSize = true;
             this.dptLBL4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dptLBL4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dptLBL4.Location = new System.Drawing.Point(21, 373);
+            this.dptLBL4.Location = new System.Drawing.Point(27, 314);
             this.dptLBL4.Name = "dptLBL4";
             this.dptLBL4.Size = new System.Drawing.Size(159, 17);
             this.dptLBL4.TabIndex = 36;
@@ -386,7 +458,7 @@
             // 
             this.swLBL2.AutoSize = true;
             this.swLBL2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.swLBL2.Location = new System.Drawing.Point(101, 174);
+            this.swLBL2.Location = new System.Drawing.Point(107, 174);
             this.swLBL2.Name = "swLBL2";
             this.swLBL2.Size = new System.Drawing.Size(32, 13);
             this.swLBL2.TabIndex = 28;
@@ -397,7 +469,7 @@
             // 
             this.trtLBL4.AutoSize = true;
             this.trtLBL4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.trtLBL4.Location = new System.Drawing.Point(101, 428);
+            this.trtLBL4.Location = new System.Drawing.Point(105, 355);
             this.trtLBL4.Name = "trtLBL4";
             this.trtLBL4.Size = new System.Drawing.Size(36, 13);
             this.trtLBL4.TabIndex = 39;
@@ -408,7 +480,7 @@
             // 
             this.LBLtt3.AutoSize = true;
             this.LBLtt3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LBLtt3.Location = new System.Drawing.Point(21, 312);
+            this.LBLtt3.Location = new System.Drawing.Point(27, 274);
             this.LBLtt3.Name = "LBLtt3";
             this.LBLtt3.Size = new System.Drawing.Size(72, 13);
             this.LBLtt3.TabIndex = 35;
@@ -419,7 +491,7 @@
             // 
             this.LBLsw1.AutoSize = true;
             this.LBLsw1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LBLsw1.Location = new System.Drawing.Point(21, 60);
+            this.LBLsw1.Location = new System.Drawing.Point(27, 93);
             this.LBLsw1.Name = "LBLsw1";
             this.LBLsw1.Size = new System.Drawing.Size(74, 13);
             this.LBLsw1.TabIndex = 22;
@@ -430,7 +502,7 @@
             // 
             this.LBLsw3.AutoSize = true;
             this.LBLsw3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LBLsw3.Location = new System.Drawing.Point(21, 287);
+            this.LBLsw3.Location = new System.Drawing.Point(27, 255);
             this.LBLsw3.Name = "LBLsw3";
             this.LBLsw3.Size = new System.Drawing.Size(74, 13);
             this.LBLsw3.TabIndex = 32;
@@ -441,7 +513,7 @@
             // 
             this.LBLtt1.AutoSize = true;
             this.LBLtt1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LBLtt1.Location = new System.Drawing.Point(21, 85);
+            this.LBLtt1.Location = new System.Drawing.Point(27, 113);
             this.LBLtt1.Name = "LBLtt1";
             this.LBLtt1.Size = new System.Drawing.Size(72, 13);
             this.LBLtt1.TabIndex = 25;
@@ -458,7 +530,7 @@
             this.info3,
             this.info2,
             this.info1});
-            this.shapeContainer1.Size = new System.Drawing.Size(600, 421);
+            this.shapeContainer1.Size = new System.Drawing.Size(592, 421);
             this.shapeContainer1.TabIndex = 0;
             this.shapeContainer1.TabStop = false;
             // 
@@ -468,10 +540,10 @@
             this.info4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.info4.FillColor = System.Drawing.Color.Transparent;
             this.info4.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.info4.Location = new System.Drawing.Point(6, 352);
+            this.info4.Location = new System.Drawing.Point(13, 302);
             this.info4.Name = "info4";
             this.info4.SelectionColor = System.Drawing.Color.Transparent;
-            this.info4.Size = new System.Drawing.Size(144, 109);
+            this.info4.Size = new System.Drawing.Size(144, 72);
             this.info4.Click += new System.EventHandler(this.info4_click);
             // 
             // info3
@@ -480,10 +552,10 @@
             this.info3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.info3.FillColor = System.Drawing.Color.Transparent;
             this.info3.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.info3.Location = new System.Drawing.Point(6, 237);
+            this.info3.Location = new System.Drawing.Point(13, 221);
             this.info3.Name = "info3";
             this.info3.SelectionColor = System.Drawing.Color.Transparent;
-            this.info3.Size = new System.Drawing.Size(144, 109);
+            this.info3.Size = new System.Drawing.Size(144, 72);
             this.info3.Click += new System.EventHandler(this.info3_click);
             // 
             // info2
@@ -492,10 +564,10 @@
             this.info2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.info2.FillColor = System.Drawing.Color.Transparent;
             this.info2.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.info2.Location = new System.Drawing.Point(6, 123);
+            this.info2.Location = new System.Drawing.Point(13, 137);
             this.info2.Name = "info2";
             this.info2.SelectionColor = System.Drawing.Color.Transparent;
-            this.info2.Size = new System.Drawing.Size(144, 109);
+            this.info2.Size = new System.Drawing.Size(144, 77);
             this.info2.Click += new System.EventHandler(this.info2_click);
             // 
             // info1
@@ -504,14 +576,17 @@
             this.info1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.info1.FillColor = System.Drawing.Color.Transparent;
             this.info1.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.info1.Location = new System.Drawing.Point(6, 8);
+            this.info1.Location = new System.Drawing.Point(13, 53);
             this.info1.Name = "info1";
             this.info1.SelectionColor = System.Drawing.Color.Transparent;
-            this.info1.Size = new System.Drawing.Size(144, 109);
+            this.info1.Size = new System.Drawing.Size(144, 77);
             this.info1.Click += new System.EventHandler(this.info1_click);
             // 
             // tabActualDeparture
             // 
+            this.tabActualDeparture.AutoScroll = true;
+            this.tabActualDeparture.Controls.Add(this.lblVertrek);
+            this.tabActualDeparture.Controls.Add(this.labelBack);
             this.tabActualDeparture.Controls.Add(this.carrierLabel);
             this.tabActualDeparture.Controls.Add(this.trackLabel);
             this.tabActualDeparture.Controls.Add(this.destLBL);
@@ -520,16 +595,37 @@
             this.tabActualDeparture.Location = new System.Drawing.Point(4, 22);
             this.tabActualDeparture.Name = "tabActualDeparture";
             this.tabActualDeparture.Padding = new System.Windows.Forms.Padding(3);
-            this.tabActualDeparture.Size = new System.Drawing.Size(606, 427);
+            this.tabActualDeparture.Size = new System.Drawing.Size(598, 427);
             this.tabActualDeparture.TabIndex = 2;
             this.tabActualDeparture.Text = "ActualDeparture";
             this.tabActualDeparture.UseVisualStyleBackColor = true;
+            // 
+            // lblVertrek
+            // 
+            this.lblVertrek.AutoSize = true;
+            this.lblVertrek.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.lblVertrek.Location = new System.Drawing.Point(70, 42);
+            this.lblVertrek.Name = "lblVertrek";
+            this.lblVertrek.Size = new System.Drawing.Size(69, 13);
+            this.lblVertrek.TabIndex = 6;
+            this.lblVertrek.Text = "Vertrektijden:";
+            // 
+            // labelBack
+            // 
+            this.labelBack.AutoSize = true;
+            this.labelBack.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.labelBack.Location = new System.Drawing.Point(14, 13);
+            this.labelBack.Name = "labelBack";
+            this.labelBack.Size = new System.Drawing.Size(47, 13);
+            this.labelBack.TabIndex = 5;
+            this.labelBack.Text = "<- Terug";
+            this.labelBack.Click += new System.EventHandler(this.labelBack_Click);
             // 
             // carrierLabel
             // 
             this.carrierLabel.AutoSize = true;
             this.carrierLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.carrierLabel.Location = new System.Drawing.Point(450, 129);
+            this.carrierLabel.Location = new System.Drawing.Point(398, 91);
             this.carrierLabel.Name = "carrierLabel";
             this.carrierLabel.Size = new System.Drawing.Size(73, 13);
             this.carrierLabel.TabIndex = 4;
@@ -539,7 +635,7 @@
             // 
             this.trackLabel.AutoSize = true;
             this.trackLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.trackLabel.Location = new System.Drawing.Point(324, 129);
+            this.trackLabel.Location = new System.Drawing.Point(272, 91);
             this.trackLabel.Name = "trackLabel";
             this.trackLabel.Size = new System.Drawing.Size(44, 13);
             this.trackLabel.TabIndex = 3;
@@ -549,7 +645,7 @@
             // 
             this.destLBL.AutoSize = true;
             this.destLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.destLBL.Location = new System.Drawing.Point(186, 129);
+            this.destLBL.Location = new System.Drawing.Point(134, 91);
             this.destLBL.Name = "destLBL";
             this.destLBL.Size = new System.Drawing.Size(58, 13);
             this.destLBL.TabIndex = 2;
@@ -559,7 +655,7 @@
             // 
             this.timeLBL.AutoSize = true;
             this.timeLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeLBL.Location = new System.Drawing.Point(120, 129);
+            this.timeLBL.Location = new System.Drawing.Point(68, 91);
             this.timeLBL.Name = "timeLBL";
             this.timeLBL.Size = new System.Drawing.Size(32, 13);
             this.timeLBL.TabIndex = 1;
@@ -569,7 +665,7 @@
             // 
             this.stationLBL.AutoSize = true;
             this.stationLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stationLBL.Location = new System.Drawing.Point(120, 93);
+            this.stationLBL.Location = new System.Drawing.Point(68, 55);
             this.stationLBL.Name = "stationLBL";
             this.stationLBL.Size = new System.Drawing.Size(87, 26);
             this.stationLBL.TabIndex = 0;
@@ -578,38 +674,61 @@
             // tabAlerts
             // 
             this.tabAlerts.AutoScroll = true;
+            this.tabAlerts.Controls.Add(this.lblCity);
+            this.tabAlerts.Controls.Add(this.btnZoek);
+            this.tabAlerts.Controls.Add(this.txtbCity);
+            this.tabAlerts.Controls.Add(this.lblVerstoringen);
             this.tabAlerts.Location = new System.Drawing.Point(4, 22);
             this.tabAlerts.Name = "tabAlerts";
             this.tabAlerts.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAlerts.Size = new System.Drawing.Size(606, 427);
+            this.tabAlerts.Size = new System.Drawing.Size(598, 427);
             this.tabAlerts.TabIndex = 3;
             this.tabAlerts.Text = "Alerts";
             this.tabAlerts.UseVisualStyleBackColor = true;
             // 
-            // btnPlanRoute
+            // lblCity
             // 
-            this.btnPlanRoute.Location = new System.Drawing.Point(270, 457);
-            this.btnPlanRoute.Name = "btnPlanRoute";
-            this.btnPlanRoute.Size = new System.Drawing.Size(75, 23);
-            this.btnPlanRoute.TabIndex = 10;
-            this.btnPlanRoute.Text = "Plan Reis";
-            this.btnPlanRoute.UseVisualStyleBackColor = true;
-            this.btnPlanRoute.Click += new System.EventHandler(this.btnPlanRoute_Click);
+            this.lblCity.AutoSize = true;
+            this.lblCity.Location = new System.Drawing.Point(307, 18);
+            this.lblCity.Name = "lblCity";
+            this.lblCity.Size = new System.Drawing.Size(79, 13);
+            this.lblCity.TabIndex = 3;
+            this.lblCity.Text = "Zoek een stad:";
             // 
-            // btnMyRoutes
+            // btnZoek
             // 
-            this.btnMyRoutes.Location = new System.Drawing.Point(351, 457);
-            this.btnMyRoutes.Name = "btnMyRoutes";
-            this.btnMyRoutes.Size = new System.Drawing.Size(75, 23);
-            this.btnMyRoutes.TabIndex = 11;
-            this.btnMyRoutes.Text = "Mijn Routes";
-            this.btnMyRoutes.UseVisualStyleBackColor = true;
+            this.btnZoek.Location = new System.Drawing.Point(498, 13);
+            this.btnZoek.Name = "btnZoek";
+            this.btnZoek.Size = new System.Drawing.Size(75, 23);
+            this.btnZoek.TabIndex = 2;
+            this.btnZoek.Text = "Zoek..";
+            this.btnZoek.UseVisualStyleBackColor = true;
+            this.btnZoek.Click += new System.EventHandler(this.btnZoek_Click);
+            // 
+            // txtbCity
+            // 
+            this.txtbCity.Location = new System.Drawing.Point(392, 15);
+            this.txtbCity.Name = "txtbCity";
+            this.txtbCity.Size = new System.Drawing.Size(100, 20);
+            this.txtbCity.TabIndex = 1;
+            // 
+            // lblVerstoringen
+            // 
+            this.lblVerstoringen.AutoSize = true;
+            this.lblVerstoringen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVerstoringen.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.lblVerstoringen.Location = new System.Drawing.Point(14, 13);
+            this.lblVerstoringen.Name = "lblVerstoringen";
+            this.lblVerstoringen.Size = new System.Drawing.Size(100, 20);
+            this.lblVerstoringen.TabIndex = 0;
+            this.lblVerstoringen.Text = "Verstoringen";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(616, 484);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(598, 484);
             this.Controls.Add(this.btnMyRoutes);
             this.Controls.Add(this.btnPlanRoute);
             this.Controls.Add(this.btnAlert);
@@ -619,10 +738,13 @@
             this.MainControl.ResumeLayout(false);
             this.tabPlanRoute.ResumeLayout(false);
             this.tabPlanRoute.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabTravelInfo.ResumeLayout(false);
             this.tabTravelInfo.PerformLayout();
             this.tabActualDeparture.ResumeLayout(false);
             this.tabActualDeparture.PerformLayout();
+            this.tabAlerts.ResumeLayout(false);
+            this.tabAlerts.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -675,6 +797,15 @@
         private System.Windows.Forms.Button btnAlert;
         private System.Windows.Forms.Button btnPlanRoute;
         private System.Windows.Forms.Button btnMyRoutes;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer2;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
+        private System.Windows.Forms.Label labelBack;
+        private System.Windows.Forms.Label lblVertrek;
+        private System.Windows.Forms.Button btnZoek;
+        private System.Windows.Forms.TextBox txtbCity;
+        private System.Windows.Forms.Label lblVerstoringen;
+        private System.Windows.Forms.Label lblCity;
     }
 }
 
