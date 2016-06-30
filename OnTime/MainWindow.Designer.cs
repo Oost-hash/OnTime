@@ -33,14 +33,13 @@
             this.btnMyRoutes = new System.Windows.Forms.Button();
             this.MainControl = new OnTime.TabControlHeaders();
             this.tabPlanRoute = new System.Windows.Forms.TabPage();
-            this.boxTime = new System.Windows.Forms.DateTimePicker();
             this.boxDate = new System.Windows.Forms.DateTimePicker();
             this.boxDepartue = new System.Windows.Forms.TextBox();
             this.btnTravelAdvice = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.boxArrival = new System.Windows.Forms.TextBox();
             this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
+            this.whiteRectangle = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabTravelInfo = new System.Windows.Forms.TabPage();
             this.dptLBLBig = new System.Windows.Forms.Label();
@@ -83,12 +82,20 @@
             this.btnZoek = new System.Windows.Forms.Button();
             this.txtbCity = new System.Windows.Forms.TextBox();
             this.lblVerstoringen = new System.Windows.Forms.Label();
+            this.tabOnTime = new System.Windows.Forms.TabPage();
+            this.btnAddRoute = new System.Windows.Forms.Button();
+            this.lblCosts = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbPlMin = new System.Windows.Forms.ComboBox();
+            this.cbPlHour = new System.Windows.Forms.ComboBox();
             this.MainControl.SuspendLayout();
             this.tabPlanRoute.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabTravelInfo.SuspendLayout();
             this.tabActualDeparture.SuspendLayout();
             this.tabAlerts.SuspendLayout();
+            this.tabOnTime.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAlert
@@ -119,6 +126,7 @@
             this.btnMyRoutes.TabIndex = 11;
             this.btnMyRoutes.Text = "Mijn Routes";
             this.btnMyRoutes.UseVisualStyleBackColor = true;
+            this.btnMyRoutes.Click += new System.EventHandler(this.btnMyRoutes_Click);
             // 
             // MainControl
             // 
@@ -126,6 +134,7 @@
             this.MainControl.Controls.Add(this.tabTravelInfo);
             this.MainControl.Controls.Add(this.tabActualDeparture);
             this.MainControl.Controls.Add(this.tabAlerts);
+            this.MainControl.Controls.Add(this.tabOnTime);
             this.MainControl.Location = new System.Drawing.Point(-6, -2);
             this.MainControl.Name = "MainControl";
             this.MainControl.SelectedIndex = 0;
@@ -134,7 +143,8 @@
             // 
             // tabPlanRoute
             // 
-            this.tabPlanRoute.Controls.Add(this.boxTime);
+            this.tabPlanRoute.Controls.Add(this.cbPlMin);
+            this.tabPlanRoute.Controls.Add(this.cbPlHour);
             this.tabPlanRoute.Controls.Add(this.boxDate);
             this.tabPlanRoute.Controls.Add(this.boxDepartue);
             this.tabPlanRoute.Controls.Add(this.btnTravelAdvice);
@@ -150,21 +160,11 @@
             this.tabPlanRoute.Text = "Search";
             this.tabPlanRoute.UseVisualStyleBackColor = true;
             // 
-            // boxTime
-            // 
-            this.boxTime.CustomFormat = "HH:MM";
-            this.boxTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.boxTime.Location = new System.Drawing.Point(320, 250);
-            this.boxTime.Name = "boxTime";
-            this.boxTime.ShowUpDown = true;
-            this.boxTime.Size = new System.Drawing.Size(58, 20);
-            this.boxTime.TabIndex = 5;
-            // 
             // boxDate
             // 
             this.boxDate.CustomFormat = "dd-MM-yyyy";
             this.boxDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.boxDate.Location = new System.Drawing.Point(240, 250);
+            this.boxDate.Location = new System.Drawing.Point(229, 250);
             this.boxDate.Name = "boxDate";
             this.boxDate.Size = new System.Drawing.Size(74, 20);
             this.boxDate.TabIndex = 4;
@@ -186,7 +186,7 @@
             this.btnTravelAdvice.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTravelAdvice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTravelAdvice.ForeColor = System.Drawing.Color.White;
-            this.btnTravelAdvice.Location = new System.Drawing.Point(258, 276);
+            this.btnTravelAdvice.Location = new System.Drawing.Point(259, 289);
             this.btnTravelAdvice.Name = "btnTravelAdvice";
             this.btnTravelAdvice.Size = new System.Drawing.Size(102, 23);
             this.btnTravelAdvice.TabIndex = 3;
@@ -222,18 +222,18 @@
             this.shapeContainer2.Margin = new System.Windows.Forms.Padding(0);
             this.shapeContainer2.Name = "shapeContainer2";
             this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.rectangleShape1});
+            this.whiteRectangle});
             this.shapeContainer2.Size = new System.Drawing.Size(592, 421);
             this.shapeContainer2.TabIndex = 7;
             this.shapeContainer2.TabStop = false;
             // 
-            // rectangleShape1
+            // whiteRectangle
             // 
-            this.rectangleShape1.FillColor = System.Drawing.Color.White;
-            this.rectangleShape1.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape1.Location = new System.Drawing.Point(208, 123);
-            this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(192, 194);
+            this.whiteRectangle.FillColor = System.Drawing.Color.White;
+            this.whiteRectangle.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
+            this.whiteRectangle.Location = new System.Drawing.Point(208, 123);
+            this.whiteRectangle.Name = "whiteRectangle";
+            this.whiteRectangle.Size = new System.Drawing.Size(192, 194);
             // 
             // pictureBox1
             // 
@@ -723,6 +723,107 @@
             this.lblVerstoringen.TabIndex = 0;
             this.lblVerstoringen.Text = "Verstoringen";
             // 
+            // tabOnTime
+            // 
+            this.tabOnTime.Controls.Add(this.btnAddRoute);
+            this.tabOnTime.Controls.Add(this.lblCosts);
+            this.tabOnTime.Controls.Add(this.lblTotal);
+            this.tabOnTime.Controls.Add(this.label1);
+            this.tabOnTime.Location = new System.Drawing.Point(4, 22);
+            this.tabOnTime.Name = "tabOnTime";
+            this.tabOnTime.Padding = new System.Windows.Forms.Padding(3);
+            this.tabOnTime.Size = new System.Drawing.Size(598, 427);
+            this.tabOnTime.TabIndex = 4;
+            this.tabOnTime.Text = "MyOnTime";
+            this.tabOnTime.UseVisualStyleBackColor = true;
+            // 
+            // btnAddRoute
+            // 
+            this.btnAddRoute.Location = new System.Drawing.Point(253, 398);
+            this.btnAddRoute.Name = "btnAddRoute";
+            this.btnAddRoute.Size = new System.Drawing.Size(117, 23);
+            this.btnAddRoute.TabIndex = 15;
+            this.btnAddRoute.Text = "Voeg route toe";
+            this.btnAddRoute.UseVisualStyleBackColor = true;
+            this.btnAddRoute.Click += new System.EventHandler(this.btnAddRoute_Click);
+            // 
+            // lblCosts
+            // 
+            this.lblCosts.AutoSize = true;
+            this.lblCosts.Location = new System.Drawing.Point(443, 21);
+            this.lblCosts.Name = "lblCosts";
+            this.lblCosts.Size = new System.Drawing.Size(104, 13);
+            this.lblCosts.TabIndex = 14;
+            this.lblCosts.Text = "Kosten in de maand:";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(553, 21);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(33, 13);
+            this.lblTotal.TabIndex = 13;
+            this.lblTotal.Text = "totaal";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label1.Location = new System.Drawing.Point(14, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 20);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Mijn routes";
+            // 
+            // cbPlMin
+            // 
+            this.cbPlMin.FormattingEnabled = true;
+            this.cbPlMin.Items.AddRange(new object[] {
+            "00",
+            "15",
+            "30",
+            "45"});
+            this.cbPlMin.Location = new System.Drawing.Point(355, 249);
+            this.cbPlMin.Name = "cbPlMin";
+            this.cbPlMin.Size = new System.Drawing.Size(38, 21);
+            this.cbPlMin.TabIndex = 14;
+            this.cbPlMin.Text = "00";
+            // 
+            // cbPlHour
+            // 
+            this.cbPlHour.FormattingEnabled = true;
+            this.cbPlHour.Items.AddRange(new object[] {
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"});
+            this.cbPlHour.Location = new System.Drawing.Point(311, 249);
+            this.cbPlHour.Name = "cbPlHour";
+            this.cbPlHour.Size = new System.Drawing.Size(38, 21);
+            this.cbPlHour.TabIndex = 13;
+            this.cbPlHour.Text = "00";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -745,6 +846,8 @@
             this.tabActualDeparture.PerformLayout();
             this.tabAlerts.ResumeLayout(false);
             this.tabAlerts.PerformLayout();
+            this.tabOnTime.ResumeLayout(false);
+            this.tabOnTime.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -754,7 +857,6 @@
         public TabControlHeaders MainControl;
         private System.Windows.Forms.TabPage tabPlanRoute;
         public System.Windows.Forms.TabPage tabTravelInfo;
-        public System.Windows.Forms.DateTimePicker boxTime;
         public System.Windows.Forms.DateTimePicker boxDate;
         public System.Windows.Forms.TextBox boxDepartue;
         private System.Windows.Forms.Button btnTravelAdvice;
@@ -799,13 +901,20 @@
         private System.Windows.Forms.Button btnMyRoutes;
         private System.Windows.Forms.PictureBox pictureBox1;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer2;
-        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape whiteRectangle;
         private System.Windows.Forms.Label labelBack;
         private System.Windows.Forms.Label lblVertrek;
         private System.Windows.Forms.Button btnZoek;
         private System.Windows.Forms.TextBox txtbCity;
         private System.Windows.Forms.Label lblVerstoringen;
         private System.Windows.Forms.Label lblCity;
+        private System.Windows.Forms.TabPage tabOnTime;
+        private System.Windows.Forms.Label lblCosts;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAddRoute;
+        public System.Windows.Forms.ComboBox cbPlMin;
+        public System.Windows.Forms.ComboBox cbPlHour;
     }
 }
 

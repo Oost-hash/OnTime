@@ -42,7 +42,7 @@ namespace OnTime
         {
             //Set the date
             var rawDate = DateTime.Parse(_main.boxDate.Text);
-            var time = _main.boxTime.Text;
+            var time = _main.cbPlHour.Text + ":" + _main.cbPlMin.Text;
             var date = rawDate.ToString("yyyy-MM-dd") + "T" + time;
 
             //Call api and get info

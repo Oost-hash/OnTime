@@ -19,10 +19,10 @@ namespace OnTime
 
             //Set datetimepickers to current date
             boxDate.Value = DateTime.Now;
-            boxTime.Value = DateTime.Now;
 
             //Sets global font to Open Sans
             Font = new Font("Open Sans", 8, FontStyle.Regular);
+
         }
 
         private void info1_click(object sender, EventArgs e)
@@ -79,6 +79,20 @@ namespace OnTime
         private void btnZoek_Click(object sender, EventArgs e)
         {
             _alerts.GetAlerts(true, txtbCity.Text);
+        }
+
+        private void btnAddRoute_Click(object sender, EventArgs e)
+        {
+            AddRoute add = new AddRoute();
+            add.Show();
+        }
+
+        private void btnMyRoutes_Click(object sender, EventArgs e)
+        {
+            tabPlanRoute.Visible = false;
+            tabActualDeparture.Visible = false;
+            tabTravelInfo.Visible = false;
+            tabOnTime.Show();
         }
     }
 }
