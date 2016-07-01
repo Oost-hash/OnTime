@@ -93,9 +93,8 @@
             this.txtbCity = new System.Windows.Forms.TextBox();
             this.lblVerstoringen = new System.Windows.Forms.Label();
             this.tabOnTime = new System.Windows.Forms.TabPage();
+            this.lblNoDatabase = new System.Windows.Forms.Label();
             this.btnAddRoute = new System.Windows.Forms.Button();
-            this.lblCosts = new System.Windows.Forms.Label();
-            this.lblTotal = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.MainControl.SuspendLayout();
             this.tabPlanRoute.SuspendLayout();
@@ -880,9 +879,9 @@
             // 
             // tabOnTime
             // 
+            this.tabOnTime.AutoScroll = true;
+            this.tabOnTime.Controls.Add(this.lblNoDatabase);
             this.tabOnTime.Controls.Add(this.btnAddRoute);
-            this.tabOnTime.Controls.Add(this.lblCosts);
-            this.tabOnTime.Controls.Add(this.lblTotal);
             this.tabOnTime.Controls.Add(this.label1);
             this.tabOnTime.Location = new System.Drawing.Point(4, 22);
             this.tabOnTime.Name = "tabOnTime";
@@ -891,6 +890,15 @@
             this.tabOnTime.TabIndex = 4;
             this.tabOnTime.Text = "MyOnTime";
             this.tabOnTime.UseVisualStyleBackColor = true;
+            // 
+            // lblNoDatabase
+            // 
+            this.lblNoDatabase.AutoSize = true;
+            this.lblNoDatabase.Location = new System.Drawing.Point(205, 213);
+            this.lblNoDatabase.Name = "lblNoDatabase";
+            this.lblNoDatabase.Size = new System.Drawing.Size(201, 13);
+            this.lblNoDatabase.TabIndex = 16;
+            this.lblNoDatabase.Text = "De connectie met de database is mislukt,";
             // 
             // btnAddRoute
             // 
@@ -904,24 +912,6 @@
             this.btnAddRoute.Text = "Voeg route toe";
             this.btnAddRoute.UseVisualStyleBackColor = false;
             this.btnAddRoute.Click += new System.EventHandler(this.btnAddRoute_Click);
-            // 
-            // lblCosts
-            // 
-            this.lblCosts.AutoSize = true;
-            this.lblCosts.Location = new System.Drawing.Point(443, 21);
-            this.lblCosts.Name = "lblCosts";
-            this.lblCosts.Size = new System.Drawing.Size(104, 13);
-            this.lblCosts.TabIndex = 14;
-            this.lblCosts.Text = "Kosten in de maand:";
-            // 
-            // lblTotal
-            // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(553, 21);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(33, 13);
-            this.lblTotal.TabIndex = 13;
-            this.lblTotal.Text = "totaal";
             // 
             // label1
             // 
@@ -1018,11 +1008,7 @@
         private System.Windows.Forms.TextBox txtbCity;
         private System.Windows.Forms.Label lblVerstoringen;
         private System.Windows.Forms.Label lblCity;
-        private System.Windows.Forms.TabPage tabOnTime;
-        private System.Windows.Forms.Label lblCosts;
-        private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnAddRoute;
         public System.Windows.Forms.ComboBox cbPlMin;
         public System.Windows.Forms.ComboBox cbPlHour;
         private System.Windows.Forms.Button btnLater;
@@ -1033,6 +1019,9 @@
         private System.Windows.Forms.Label lblError1;
         private System.Windows.Forms.Label lblError2;
         private System.Windows.Forms.Label lblError3;
+        public System.Windows.Forms.Button btnAddRoute;
+        public System.Windows.Forms.Label lblNoDatabase;
+        public System.Windows.Forms.TabPage tabOnTime;
     }
 }
 

@@ -161,7 +161,7 @@ namespace OnTime
             tabActualDeparture.Visible = false;
             tabTravelInfo.Visible = false;
             tabOnTime.Show();
-            
+            _Routes.GetRoutes();
         }
 
         private void EarlierTravelOpt(object sender, EventArgs e)

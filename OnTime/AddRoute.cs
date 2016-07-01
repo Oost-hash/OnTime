@@ -7,11 +7,15 @@ namespace OnTime
     {
 
         private readonly Database _db;
+        private readonly MainWindow _main;
+        private readonly Routes _routes;
 
         public AddRoute()
         {
             InitializeComponent();
             _db = new Database();
+            _main = new MainWindow();
+            _routes = new Routes(_main);
 
 
             //Clear errors
@@ -77,6 +81,7 @@ namespace OnTime
             {
                 _db.InsertData(txtbFrom.Text, txtbTo.Text, arrivalTime, departureTime, price);
                 Close();
+                _routes.GetRoutes();
             }
         }
     }

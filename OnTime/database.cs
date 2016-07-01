@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using System;
+using System.Data.SqlClient;
 
 namespace OnTime
 {
@@ -9,91 +10,71 @@ namespace OnTime
     {
 
         //Fields for Database connection
-        public static MySqlConnection _conn;
+        private MySqlConnection _conn;
         private const string MyConnectionString = "server=127.0.0.1;uid=root;pwd=;database=ontime;";
 
         public Database()
         {
-            DatabaseConection();
+            _conn = DBconect("open");
         }
-        public bool DBconect(string conect)
-        {
-            MySqlConnection _conn;
-            _conn = new MySqlConnection(MyConnectionString);
-            try
-            {
-                _conn = new MySqlConnection(MyConnectionString);
-                switch (conect)
-                {
-                    case "open":
-                        _conn.Open();
-
-                        break;
-                    case "dicht":
-                        _conn.Close();
-                        break;
-                }
-                return true;
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
-        }
-
-
 
         /// <summary>
         /// Open database connection
         /// </summary>
-        public static MySqlConnection DatabaseConection()
+        public dynamic DBconect(string conect)
         {
+            var conn = new MySqlConnection(MyConnectionString);
             try
             {
-                //Open connection
-                _conn = new MySqlConnection { ConnectionString = MyConnectionString };
-                _conn.Open();
+                conn = new MySqlConnection(MyConnectionString);
+                switch (conect)
+                {
+                    case "open":
+                        conn.Open();
+                        break;
+                    case "dicht":
+                        conn.Close();
+                        break;
+                }
+                return conn;
             }
-            catch (MySqlException ex)
+            catch (MySqlException)
             {
-                //catch errors
-                MessageBox.Show(ex.Message);
+                _conn = null;
+                return _conn;
             }
-
-            return _conn;
         }
 
         /// <summary>
         /// Insert data into database
         /// </summary>
-        public static void InsertData(string from, string to, string arrival, string departure, int price)
+        public void InsertData(string from, string to, string arrival, string departure, int price)
         {
-            DatabaseConection();
             //Make query and excute query
             string query = $"INSERT INTO `routes`(`ID`, `departure`, `arrival`, `price`, `arrivalTime`, `departureTime`) VALUES ('NULL', '{from}', '{to}', '{price}' ,'{arrival}', '{departure}')";
             MySqlCommand command = new MySqlCommand(query, _conn);
             command.ExecuteReader();
-
-            //Close database connection
-            _conn.Close();
         }
 
-        public static Dictionary<int ,string> ReadData()
+        public MySqlDataReader ReadData()
         {
-            Dictionary<int, string> lijst = new Dictionary<int, string>();
-            string query = $"SELECT * FROM `routes`";
-            string Connection = "server=127.0.0.1;uid=root;" + "pwd=;database=ontime";
-            _conn = new MySqlConnection(Connection);
-            MySqlCommand command = new MySqlCommand(query, _conn);
-            _conn.Open();
-            MySqlDataReader Read = command.ExecuteReader();
-            while (Read.Read())
+            MySqlDataReader read = null;
+            string query = @"SELECT * FROM `routes`";
+            if (_conn != null)
             {
-                Console.WriteLine(Convert.ToString(Read.GetValue(0) + " : " + Read.GetValue(1) + " : " + Read.GetValue(2) + " : " + Read.GetValue(3) + " : " + Read.GetValue(4) + " : " + Read.GetValue(5)));
-                lijst.Add(Convert.ToInt32(Read.GetValue(0)), Read.GetValue(1) + " : " + Read.GetValue(2) + " : " + Read.GetValue(3) + " : " + Read.GetValue(4) + " : " + Read.GetValue(5));
+                MySqlCommand command = new MySqlCommand(query, _conn);
+                read = command.ExecuteReader();
             }
-            return lijst;
+            return read;
+        }
+
+        public void Remove(int idDB)
+        {
+            using (MySqlCommand command = new MySqlCommand("DELETE FROM `routes` WHERE `ID` = '" + idDB + "'", _conn))
+            {
+                command.ExecuteNonQuery();
+            }
+            _conn.Close();
         }
     }
 }
